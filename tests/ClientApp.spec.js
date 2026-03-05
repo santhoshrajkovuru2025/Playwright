@@ -43,7 +43,7 @@ test('Test Application for Client App', async ({browser})=>{
 /*   await card.nth(3).fill('rahulshettyacademy')
   await coupon.click(); */
   await page.locator("[placeholder='Select Country']").pressSequentially('Ind',{delay:150});
-  const dropdown = page.locator(".ta-results");
+  const dropdown = page.locator(".form-group .ta-results");
   await dropdown.waitFor();
   const optionsCount= await dropdown.locator('button').count();
   for(let i=0;i<=optionsCount;i++) {
@@ -59,5 +59,17 @@ test('Test Application for Client App', async ({browser})=>{
       await expect (page.locator('.hero-primary')).toHaveText(" Thankyou for the order. ");
       const orderID= await page.locator('.em-spacer-1 .ng-star-inserted').textContent();
       console.log(orderID)
+     await page.locator('button[routerlink="/dashboard/myorders"]').click();
+     await page.locator('tbody').waitFor();
+     const orderRows= await page.locator('tbody tr');
+     for(let i=0;i<=await orderRows.count();++i){
+        const rowOrderId = await orderRows.nth(i).locator('th').textContent();
+        if(orderID.includes(rowOrderId)){
+            await orderRows.nth(i).locator('button').first().click();
+            break;
+        }
+     }
+     const OrderIdDetails = await page.locator('.col-text').textContent();
+     expect(orderID.includes(OrderIdDetails)).toBeTruthy();
   await page.pause()
 });
