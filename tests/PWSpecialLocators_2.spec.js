@@ -20,5 +20,5 @@ test('test the ProtoCommerce App with PW Special Locators', async({browser})=>{
     await page.getByRole('link',{name : 'Shop'}).click(); 
     // chaining loactors by suing the locator, filter() and getByRole
     await page.locator('app-card').filter({hasText:'Blackberry'}).getByRole('button',{name:'Add'}).click();
-await page.pause()
+
 })

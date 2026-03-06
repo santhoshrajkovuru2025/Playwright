@@ -25,11 +25,11 @@ test('UI Controls test',async({browser})=>{
         await page.locator('#terms').uncheck();
         expect(await page.locator('#terms').isChecked()).toBeFalsy();
         await expect(documentLink).toHaveAttribute('class','blinkingText');
-      // await page.pause();
+    
 
 });
 
-test.only('child window handles',async({browser})=>{
+test('child window handles',async({browser})=>{
         const context = await browser.newContext();
         const page = await context.newPage();
      await page.goto('https://rahulshettyacademy.com/loginpagePractise/');
