@@ -70,6 +70,6 @@ test('Test Application for Client App', async ({browser})=>{
         }
      }
      const OrderIdDetails = await page.locator('.col-text').textContent();
-     expect(orderID.includes(OrderIdDetails)).toBeTruthy();
+     expect(orderID.includes(OrderIdDetails)).toBeTruthy;
   await page.pause()
 });
