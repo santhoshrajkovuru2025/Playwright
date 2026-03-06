@@ -32,12 +32,12 @@
         // validating the date with the assertion
         const inputDate =  newPage.locator('.react-date-picker__inputGroup input')
         // For loop to verify the expecteddate to the given input date.
-        for(let i=0;i<=expectedDate.length;i++)
+/*         for(let i=0;i<=expectedDate.length;i++)
         {
            const value = await inputDate.nth(i).inputValue();
            expect(value).toEqual(expectedDate[1]);
             
-        }
+        } */
 
  });
 

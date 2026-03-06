@@ -47,7 +47,7 @@ test('child window handles',async({browser})=>{
     console.log(text);
     console.log(domain);
     await page.locator('#username').fill(domain);
-    await page.pause();
+    // await page.pause();
     // console.log(await page.locator('#username').textContent());
     console.log(await page.locator('#username').inputValue()); // retrieves the data when the page is not connected to the DOM.
 });
