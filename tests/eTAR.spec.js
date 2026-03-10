@@ -20,5 +20,4 @@ test('Login to the Provider Portal',async({browser})=>{
     await medicalServices.click();
     console.log(await page.title());
     await expect(page).toHaveTitle('Medi-Cal: Treatment Authorization Request Menu');
-    
 });
