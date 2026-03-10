@@ -28,3 +28,6 @@ test('Capture Screenshots and Visual Comparision', async({page})=>{
     await expect(page.locator('#displayed-text')).toBeHidden();
 
 });
+
+
+
