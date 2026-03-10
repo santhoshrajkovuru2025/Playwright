@@ -3,7 +3,7 @@
 
 import {test,expect} from '@playwright/test'
 
-test.only('visual Testing',async({browser})=>{
+test('visual Testing',async({browser})=>{
 
     const context = await browser.newContext();
     const page = await context.newPage();
