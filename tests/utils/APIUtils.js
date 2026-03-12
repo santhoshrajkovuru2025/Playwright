@@ -1,56 +1,77 @@
 
+// Utility class to handle API operations such as authentication and order creation
+
 class API_Utils {
 
-    constructor (apiContext,loginPayLoad){
-
-        this.apiContext = apiContext;
-        this.loginPayLoad = loginPayLoad;
+    // Constructor initializes API request context and login payload
+    constructor(apiContext, loginPayLoad) {
+        this.apiContext = apiContext;      // Playwright API request context
+        this.loginPayLoad = loginPayLoad;  // Login request body (email, password, etc.)
     }
 
+    // Method to generate an authentication token
+    async getToken() {
 
+        // Send POST request to login API with login payload
+        const loginResponse = await this.apiContext.post('https://rahulshettyacademy.com/api/ecom/auth/login',
+            {
+                data: this.loginPayLoad   // Login request payload
+            }
+        );
 
-   async getToken(){
+        // Convert API response to JSON format
+        const loginResponseJson = await loginResponse.json();
 
-        // Store the API endpoint URL and pyload information in the loginResponse variable 
-     const loginResponse = await this.apiContext.post('https://rahulshettyacademy.com/api/ecom/auth/login',
-        {
-            data:this.loginPayLoad  // 200, 201 - API reponse codes
-        })
-        // To get the json for the login response and stored in a variable 'loginResponseJson'
-
-        const loginResponseJson = await loginResponse.json()
-
-        // To grab the token value nad stored in variable in 'jsonToken'
-
+        // Extract the authentication token from the response
         const jsonToken = loginResponseJson.token;
+
+        // Print token in console (useful for debugging)
         console.log(jsonToken);
+
+        // Return token for further API calls
         return jsonToken;
     }
 
-    async CreateOrder(orderPayload){
-       
-                // object for orderId
-                let response ={};
-                response.jsonToken = await this.getToken();
-                // API Endpoint URL for creating an Order.
-                const orderResponse = await this.apiContext.post('https://rahulshettyacademy.com/api/ecom/order/create-order',{
-        
-                    // Entering the payload for the creation of Order
-                    data: orderPayload,
-                    headers: {
-                         'Authorization': response.jsonToken,
-                         'Content-Type' : 'application/json'
-                        },
-                    //Header Information for authoization of the user for creating the id.
-                    
-                });
-                const orderResponseJson = await orderResponse.json();
-                console.log(orderResponseJson);
-                const orderID = orderResponseJson.orders[0];
-                response.orderID =orderID;
-                return response; // returns the token and order ID
-                
+    // Method to create an order using the authentication token
+    async CreateOrder(orderPayload) {
+
+        // Object to store token and orderId
+        let response = {};
+
+        // Get authentication token
+        response.jsonToken = await this.getToken();
+
+        // Send POST request to create a new order
+        const orderResponse = await this.apiContext.post(
+            'https://rahulshettyacademy.com/api/ecom/order/create-order',
+            {
+                // Order request body
+                data: orderPayload,
+
+                // Headers required for authorization and content type
+                headers: {
+                    'Authorization': response.jsonToken,
+                    'Content-Type': 'application/json'
+                }
+            }
+        );
+
+        // Convert order API response to JSON
+        const orderResponseJson = await orderResponse.json();
+
+        // Print order response for debugging
+        console.log(orderResponseJson);
+
+        // Extract order ID from response
+        const orderID = orderResponseJson.orders[0];
+
+        // Store order ID in response object
+        response.orderID = orderID;
+
+        // Return both token and order ID
+        return response;
     }
 }
 
-export {API_Utils};
+// Export the API_Utils class so it can be imported in test files
+export { API_Utils };
