@@ -3,7 +3,7 @@
 import { test, expect, request } from '@playwright/test';
 
 // Import API utility class to reuse API methods
-import { API_Utils } from './utils/APIutils';
+import {API_Utils} from './utils/APIUtils';
 
 // Login payload containing user credentials
 const loginPayLoad = {
