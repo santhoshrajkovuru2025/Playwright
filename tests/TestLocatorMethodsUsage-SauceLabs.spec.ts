@@ -1,8 +1,8 @@
 
-import {describe} from 'node:test'
-import {test,expect} from '@playwright/test'
 
-describe('To Test Locator Methods with Options', () => {
+import {test} from '@playwright/test';
+
+test.describe('To Test Locator Methods with Options', () => {
 
     test('Testing Locator Methods', async({page})=> {
 

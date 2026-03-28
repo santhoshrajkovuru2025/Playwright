@@ -1,9 +1,9 @@
 
-import { describe } from 'node:test'
+
 import{test,expect} from '@playwright/test'
 
 
-describe('To Test SauceLabs', ()=> {
+test.describe('To Test SauceLabs', ()=> {
 
     test('To Login to the SauceLabs Application', async({page})=> {
 
