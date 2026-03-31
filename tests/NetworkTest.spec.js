@@ -1,6 +1,6 @@
 // Import required modules from Playwright
 // 'request' is used for making API calls
-import { test, expect, request } from '@playwright/test';
+import { test, request } from '@playwright/test';
 
 // Import API utility class to reuse API methods
 import {API_Utils} from './utils/APIUtils';
@@ -19,6 +19,13 @@ const orderPayload = {
             productOrderedId: "6960eac0c941646b7a8b3e68"
         }
     ]
+};
+
+// Creating a fake payload response:
+
+const fakePayLoadOrders = {
+        data:[],
+        message: 'No Orders'
 };
 
 // Global variable to store API response (token + orderId)
@@ -53,23 +60,33 @@ test('Place an order in the Client App using API call', async ({ page }) => {
 
     // Routing the page to the URL for mocking the orders page
 
-    await page.route('https://rahulshettyacademy.com/api/ecom/order/get-orders-for-customer/69a6aab1415d779f9b53adaf',
-    route =>{
+    await page.route('https://rahulshettyacademy.com/api/ecom/order/get-orders-for-customer/*',
+    async route =>{
 
-        // Intercepting the response -> API Response -> Browser -> Render the data at front end
         
 
-
+       const response =  await page.request.fetch(route.request());
+       let body = JSON.stringify(fakePayLoadOrders);
+       route.fulfill({
+            response,
+            body,
+        });
+        // Intercepting the response -> API Response -> fake Response(from playwright)-> Browser -> Render the data at front end
     });
 
     // Open "My Orders" page
     await page.locator('button[routerlink="/dashboard/myorders"]').click();
 
-    // Wait until order table is visible
-    await page.locator('tbody').waitFor();
+    // waiting for the response from the page.
+    await page.waitForResponse('https://rahulshettyacademy.com/api/ecom/order/get-orders-for-customer/*');
+    console.log(await page.locator('.mt-4').textContent());
+
+
+     // Wait until order table is visible
+    // await page.locator('tbody').waitFor();
 
     // Locate all rows in the orders table
-    const orderRows = page.locator('tbody tr');
+    // const orderRows = page.locator('tbody tr');
 
    
 
