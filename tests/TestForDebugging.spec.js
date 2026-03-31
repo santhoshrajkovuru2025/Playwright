@@ -1,5 +1,5 @@
 
-import {test, expect} from '@playwright/test'
+import {test} from '@playwright/test'
 
 test('test the ProtoCommerce App with PW Special Locators', async({browser})=>{
 

@@ -5,6 +5,23 @@ test('First test for the browser', async ({ browser }) => {
  
   const context = await browser.newContext();
   const page = await context.newPage();  
+
+  // **/* means any url and .css now we are aborting the css related url in the below page.
+
+  await page.route('**/*.css',route=>route.abort()); // it will stops css related thing in the browser
+
+  // now blocking the images related files
+
+  await page.route('**/*.{jpg,png,jpeg}',route=>route.abort());
+
+  // to register all the calls in a page and prints 
+
+  page.on('request', request=> console.log(request.url()));
+
+  // to retrieve the status code for every call 
+
+  page.on('response', response => console.log(response.url, response.status()));
+
   await page.goto('https://rahulshettyacademy.com/loginpagePractise/');
   console.log(await page.title())
   await expect(page).toHaveTitle('LoginPage Practise | Rahul Shetty Academy')

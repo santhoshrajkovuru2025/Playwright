@@ -6,11 +6,8 @@ test('UI Controls test',async({browser})=>{
     const context = await browser.newContext();
     const page = await context.newPage();
     await page.goto('https://rahulshettyacademy.com/loginpagePractise/');
-    const documentLink = page.locator("[href*='documents-request']");
-        const userName = page.locator('#username');
-        const userpassword = page.locator('#password');
-            await userName.fill('rahulshettyacademy');
-            await userpassword.fill('Learning@830$3mK2');
+            await page.locator('#username').fill('rahulshettyacademy');
+            await page.locator('#password').fill('Learning@830$3mK2');
           // const signIn = page.locator('#signInBtn');
           // await signIn.click();
        const dropdown = page.locator('select.form-control');
@@ -24,7 +21,7 @@ test('UI Controls test',async({browser})=>{
         await expect(page.locator('#terms')).toBeChecked();
         await page.locator('#terms').uncheck();
         expect(await page.locator('#terms').isChecked()).toBeFalsy();
-        await expect(documentLink).toHaveAttribute('class','blinkingText');
+        await expect(page.locator("[href*='documents-request']")).toHaveAttribute('class','blinkingText');
     
 
 });
