@@ -10,7 +10,7 @@ class DashboardPage {
 
     async searchProductAddCart(productName) {
         await this.products.first().waitFor();
-
+        console.log(await this.page.locator('.card-body b').allTextContents());
         const count = await this.products.count();
         let productFound = false;
 

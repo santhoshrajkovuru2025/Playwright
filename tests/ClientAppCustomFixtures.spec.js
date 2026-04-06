@@ -1,10 +1,10 @@
-import { test, expect } from '@playwright/test';
+
+import {customTest} from '../Test-Data/testbase';
+import { expect } from '@playwright/test';
 import { PageObjectManager } from '../PageObjects/PageObjectManager';
-import PlaceOrderTestData from '../Test-Data/PlaceOrderTestData.json';
-
-const dataset = JSON.parse(JSON.stringify(PlaceOrderTestData));
-
-test('Test Application for Client App', async ({ page }) => {
+ // const dataset = JSON.parse(JSON.stringify(PlaceOrderTestData));
+console.log('customTest:', customTest);
+customTest('Test Application for Client App', async ({ page,testDataForOrder }) => {
 
    const pageObjectManager = new PageObjectManager(page);
 
@@ -15,13 +15,13 @@ test('Test Application for Client App', async ({ page }) => {
    const OrdersHistoryPage = pageObjectManager.getOrderHistoryPage();
 
    await loginPage.goTo();
-   await loginPage.validLogin(dataset.userName, dataset.password);
-   await dashboardPage.searchProductAddCart(dataset.productName);
+   await loginPage.validLogin(testDataForOrder.userName, testDataForOrder.password);
+   await dashboardPage.searchProductAddCart(testDataForOrder.productName);
    await dashboardPage.navigateToOrders();
-   await cartPage.verifyProductIsDisplayed(dataset.productName);
+   await cartPage.verifyProductIsDisplayed(testDataForOrder.productName);
    await cartPage.checkout();
    await ordersReviewPage.searchCountryAndSelect('ind', 'India');
-   await ordersReviewPage.verifyEmailId(dataset.userName);
+   await ordersReviewPage.verifyEmailId(testDataForOrder.userName);
 
    const orderId = await ordersReviewPage.submitAndGetOrderId();
    console.log(orderId);

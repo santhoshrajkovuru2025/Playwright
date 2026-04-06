@@ -1,10 +1,13 @@
 import { test, expect } from '@playwright/test';
 import { PageObjectManager } from '../PageObjects/PageObjectManager';
-import PlaceOrderTestData from '../Test-Data/PlaceOrderTestData.json';
+import PlaceOrderTestData2 from '../Test-Data/PlaceOrderTestData2.json';
 
-const dataset = JSON.parse(JSON.stringify(PlaceOrderTestData));
+const dataset = JSON.parse(JSON.stringify(PlaceOrderTestData2));
 
-test('Test Application for Client App', async ({ page }) => {
+// this test is done by parameterization using multiple data sets.
+
+for(const data of dataset){
+test(`Test Client App Login for ${data.productName}`, async ({ page }) => {
 
    const pageObjectManager = new PageObjectManager(page);
 
@@ -15,13 +18,13 @@ test('Test Application for Client App', async ({ page }) => {
    const OrdersHistoryPage = pageObjectManager.getOrderHistoryPage();
 
    await loginPage.goTo();
-   await loginPage.validLogin(dataset.userName, dataset.password);
-   await dashboardPage.searchProductAddCart(dataset.productName);
+   await loginPage.validLogin(data.userName, data.password);
+   await dashboardPage.searchProductAddCart(data.productName);
    await dashboardPage.navigateToOrders();
-   await cartPage.verifyProductIsDisplayed(dataset.productName);
+   await cartPage.verifyProductIsDisplayed(data.productName);
    await cartPage.checkout();
    await ordersReviewPage.searchCountryAndSelect('ind', 'India');
-   await ordersReviewPage.verifyEmailId(dataset.userName);
+   await ordersReviewPage.verifyEmailId(data.userName);
 
    const orderId = await ordersReviewPage.submitAndGetOrderId();
    console.log(orderId);
@@ -31,3 +34,4 @@ test('Test Application for Client App', async ({ page }) => {
    expect(orderId).toContain(historyOrderId);
 
 });
+};
