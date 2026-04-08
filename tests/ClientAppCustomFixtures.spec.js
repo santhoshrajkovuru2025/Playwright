@@ -1,9 +1,9 @@
 
-import {customTest} from '../Test-Data/testbase';
+import {customTest} from '../TestData/testbase';
 import { expect } from '@playwright/test';
 import { PageObjectManager } from '../PageObjects/PageObjectManager';
  // const dataset = JSON.parse(JSON.stringify(PlaceOrderTestData));
-console.log('customTest:', customTest);
+// console.log('customTest:', customTest);
 customTest('Test Application for Client App', async ({ page,testDataForOrder }) => {
 
    const pageObjectManager = new PageObjectManager(page);

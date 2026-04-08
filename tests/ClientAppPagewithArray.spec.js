@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { PageObjectManager } from '../PageObjects/PageObjectManager';
-import PlaceOrderTestData2 from '../Test-Data/PlaceOrderTestData2.json';
+import PlaceOrderTestData2 from '../TestData/PlaceOrderTestData2.json';
 
 const dataset = JSON.parse(JSON.stringify(PlaceOrderTestData2));
 
