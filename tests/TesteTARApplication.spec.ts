@@ -7,7 +7,7 @@ import { test,expect } from '@playwright/test';
         await page.locator('#pname').pressSequentially('1548201965');
         await page.locator('#oname').fill('01');
         await page.locator('#emailId').fill('santhoshraj.kovuru@softsol.com');
-        await page.selectOption('#Environment', 'DEV');
+        await page.locator('#Environment').selectOption('DEV');
         await page.locator('#txt_ShowUrl').click();
         await page.locator('#LinkMedicalServices').click();
         console.log(await page.title());
@@ -68,6 +68,29 @@ import { test,expect } from '@playwright/test';
         await page.locator('#submit1').click();
 
         // TAR Creation Page.
-        console.log(await page.locator('p:has-text("TAR #") b').textContent());
-        
+
+        let TARNum:any = await page.textContent("//*[text()='TAR # : ']");
+        let TAR:any = TARNum.split(':')
+
+        let TCN:any;
+
+        if (TAR.length>1)
+            {
+            console.log('TCN:' + TAR[1].trim());
+            TCN = TAR[1].trim();
+        }
+        else {
+            console.log('Error Message');
+        }
+
+        // TAR Inquiry Page:
+
+        await page.locator('a[href = "surgewebservice?serviceName=surgewebservice&templateName=TARMain.htm&CurrentPage=reset_updateflag"]').click();
+        await page.locator('[href="surgewebservice?&ServiceName=surgewebservice&TemplateName=Inquiry_Sel.htm&CurrentPage=no_save"]').click();
+        await page.locator('[name="TarNum"]').pressSequentially(TCN);
+
+        page.on('dialog', dialog=>{dialog.accept()});
+        await page.locator('[name="Submit"]').click();
+        await page.locator('a[href*="surgewebservice?serviceName=surgewebservice&templateName=Inquiry"]').click();
+
     });
