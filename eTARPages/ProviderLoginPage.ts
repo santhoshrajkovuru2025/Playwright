@@ -30,7 +30,8 @@ class ProviderLoginPage {
     }
 
     async LoginTo(){
-        await this.page.goto('https://silsr.softsol.com:6118/ProviderPortalSimulator?handler=login', {timeout: 60000 });
+
+        await this.page.goto('https://silsr.softsol.com:6118/ProviderPortalSimulator?handler=login');
     }
 
     async LoginDetails(ProviderID:string,OwnerNum:string,userEmail:string){

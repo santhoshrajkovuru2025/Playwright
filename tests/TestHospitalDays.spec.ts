@@ -1,14 +1,9 @@
-import { test,expect } from '@playwright/test';
-import { eTARPageManager } from '../eTARPages/eTARPageManager';
+import { test } from '@playwright/test';
+import {eTARPageManager}  from '../eTARPages/eTARPageManager';
 import LoginCredentials from '../eTARTestData/LoginCredentials.json';
 import ProviderInformation from '../eTARTestData/ProviderInformation.json';
 import PatientInformation from '../eTARTestData/PatientInformation.json';
 import ServiceInformation  from '../eTARTestData/ServiceInformation.json';
-
-const loginDetails = LoginCredentials;
-const providerDetails = ProviderInformation;
-const patientDetails = PatientInformation;
-const serviceDetails = ServiceInformation;
 
     test('Creating a TAR from eTAR Application', async({page})=>{
         
@@ -22,16 +17,16 @@ const serviceDetails = ServiceInformation;
 
         // Login Page 
         await loginProviderPage.LoginTo();
-        await loginProviderPage.LoginDetails(loginDetails.ProviderID,loginDetails.OwnerNum,loginDetails.userEmail);
+        await loginProviderPage.LoginDetails(LoginCredentials.ProviderID,LoginCredentials.OwnerNum,LoginCredentials.userEmail);
 
         // Enter the Provider Information page
-        await providerInformationPage.ProviderInformation(providerDetails.contactName,providerDetails.TARCompleted,providerDetails.PhoneAreaCode,providerDetails.PhoneAreaPrefix,providerDetails.PhoneAreaSuffix,providerDetails.PhoneExtension)
+        await providerInformationPage.ProviderInformation(ProviderInformation.contactName,ProviderInformation.TARCompleted,ProviderInformation.PhoneAreaCode,ProviderInformation.PhoneAreaPrefix,ProviderInformation.PhoneAreaSuffix,ProviderInformation.PhoneExtension)
 
         // Patient Information
-        await patientInformationPage.PatientInformation(patientDetails.MedicalID,patientDetails.PatientLastname,patientDetails.PatientFirstName,patientDetails.PatientDOB)
+        await patientInformationPage.PatientInformation(PatientInformation.MedicalID,PatientInformation.PatientLastname,PatientInformation.PatientFirstName,PatientInformation.PatientDOB)
 
         // Service page:
-        await serviceInformationPage.ServiceInformation(serviceDetails.ServiceCode,serviceDetails.FromDate,serviceDetails.ThroughDate,serviceDetails.AdmitDate,serviceDetails.DischargeDate,serviceDetails.ICD10Code,serviceDetails.DateofOnset)
+        await serviceInformationPage.ServiceInformation(ServiceInformation.ServiceCode,ServiceInformation.FromDate,ServiceInformation.ThroughDate,ServiceInformation.AdmitDate,ServiceInformation.DischargeDate,ServiceInformation.ICD10Code,ServiceInformation.DateofOnset)
 
         // Submit TAR from the services page.
         await TARsubmissionpage.TARSubmission();
@@ -41,5 +36,4 @@ const serviceDetails = ServiceInformation;
         // TAR Inquiry Page:
         await TARInquirypage.TARInquiry(TCN);
         
-
     });

@@ -14,7 +14,7 @@ class PatientInformationPage {
     constructor (page:Page){
 
         this.page = page;
-        this.MedicalID =page.locator('input[name="MedicalID"]')
+        this.MedicalID =page.locator('input[name="MedicalID"]');
         this.PatientLastName = page.locator('input[name="PatLstNme"]');
         this.PatientFirstName= page.locator('input[name="PatFrstNme"]');
         this.PatientDOB=page.locator('input[name="PatDOB"]');
@@ -22,7 +22,7 @@ class PatientInformationPage {
         this.PatientSubmission =page.locator('[name="Submit"]');
     }
 
-    async PatientInformation(MedicalID:string,PatientLastName:string,PatientFirstName:string,PatientDOB:string,){
+    async PatientInformation(MedicalID:string,PatientLastName:string,PatientFirstName:string,PatientDOB:string){
     
         await this.MedicalID.fill(MedicalID);
         await this.PatientLastName.fill(PatientLastName);
