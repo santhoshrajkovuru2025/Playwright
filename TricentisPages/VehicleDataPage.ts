@@ -28,12 +28,12 @@ class VehicleDataPage{
         this.nextInsuranceButton= page.locator('#nextenterinsurantdata');
 
     }
-   async getVehicleDetails(){
+   async getVehicleDetails(engineperformance:string,listPrice:string,licenseNumber:string,annualMilleage:string){
 
         // To select option for 'Make' in Vehicle Data:
         await this.make.selectOption('Mercedes Benz');
         // Enter the Engine Performance Data in Vehicle Data.
-        await this.enginePerformance.fill('1400');
+        await this.enginePerformance.fill(engineperformance);
         // Enter the Date of Manufacturer at Vehicle Data.
         await this.manufactureDate.fill('04/01/2025');
         // Select the option at Number of Seats at Vehicle Data.
@@ -41,11 +41,11 @@ class VehicleDataPage{
         // Select the option Fuel Type at Vehicle Data.
         await this.fuel.selectOption('Electric Power');
         // Enter the data in the List Price [$] at Vehicle Data.
-        await this.listPrice.fill('600');
+        await this.listPrice.fill(listPrice);
         // Enter the data in the License Plate Number at Vehicle Data.
-        await this.licenseNumber.fill('AK15JH413');
+        await this.licenseNumber.fill(licenseNumber);
         // Enter the data in the Annual Mileage [mi] at Vehicle Data.
-        await this.annualMilleage.fill('50000');
+        await this.annualMilleage.fill(annualMilleage);
         // Click on the 'Next' button.
         await this.nextInsuranceButton.click();
 

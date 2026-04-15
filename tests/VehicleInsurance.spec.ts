@@ -1,6 +1,9 @@
 
 import { test } from '@playwright/test';
 import { TricentisPageObject } from '../TricentisPages/TricentisPageObject';
+import InsuranceDetails from '../TricentisTestdata/InsuranceDetails.json';
+import sendQuotation from '../TricentisTestdata/sendQuotation.json';
+import vehicleDetails from '../TricentisTestdata/vehicleDetails.json';
 
 test.describe('Testing Tricentis Vehicle Insurance Application', () => {
 
@@ -19,10 +22,10 @@ test.describe('Testing Tricentis Vehicle Insurance Application', () => {
         await login.selectVehicle();
 
         // Enter Vehicle Data:
-        await vehicle.getVehicleDetails();
+        await vehicle.getVehicleDetails(vehicleDetails.engineperformance,vehicleDetails.listPrice,vehicleDetails.licenseNumber,vehicleDetails.annualMilleage);
 
         // Enter Insurance Data:
-        await Insurance.getInsurance();
+        await Insurance.getInsurance(InsuranceDetails.firstName,InsuranceDetails.lastName,InsuranceDetails.streetAddress,InsuranceDetails.ZipCode,InsuranceDetails.city,InsuranceDetails.website);
 
         // Enter Product Data Price Option:
         await Product.getProductData();
@@ -31,7 +34,7 @@ test.describe('Testing Tricentis Vehicle Insurance Application', () => {
     
 
         // Send Quote:
-        await Quotation.getsendQuotation();
+        await Quotation.getsendQuotation(sendQuotation.email,sendQuotation.phone,sendQuotation.userName,sendQuotation.password,sendQuotation.Comments);
 
 
 

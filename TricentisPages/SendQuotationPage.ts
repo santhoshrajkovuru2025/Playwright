@@ -29,20 +29,20 @@ class sendQuotationPage {
 
     }
 
-    async getsendQuotation() {
+    async getsendQuotation(email:string,phone:string,userName:string,password:string,Comments:string) {
 
         // To enter the Email at the Send Quote section.
-        await this.email.fill('swaroopreddy.y@softsol.com')
+        await this.email.fill(email)
         // To enter the Phone number at the Send Quote section.
-        await this.phone.fill('9814512121');
+        await this.phone.fill(phone);
         //  To enter the username at the Send Quote section.
-        await this.userName.fill('swaroop19');
+        await this.userName.fill(userName);
         // To enter the password at the Send Quote section.
-        await this.password.fill('Swaroop@123!');
+        await this.password.fill(password);
         // To enter the Confrm password at the Send Quote section.
-        await this.confirmPassword.fill('Swaroop@123!');
+        await this.confirmPassword.fill(password);
         // To enter the comments at the Send Quote section.
-        await this.Comments.fill('The above Insurance Details are verified for Automobile. Further Processing details will be shared soon');
+        await this.Comments.fill(Comments);
         // to click on the send button at the Send Quote section.
         await this.SendEmailButton.click();
         await this.page.waitForLoadState();

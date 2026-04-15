@@ -40,12 +40,12 @@ class InsurancePage {
 
     }
     
-   async getInsurance(){
+   async getInsurance(firstName:string,lastName:string,streetAddress:string,ZipCode:string,city:string,website:string){
 
-    // Enter the First Name in Insurant Data.
-            await this.firstName.fill('Edmond');
+    // Enter the First Name in Insurance Data.
+            await this.firstName.fill(firstName);
             // Enter the Last Name in Insurant Data.
-            await this.lastName.fill('Samuel');
+            await this.lastName.fill(lastName);
             // Enter the Date of Birth in Insurant Data.
             await this.birthDay.fill('10/12/1989');
             await this.page.keyboard.press('Tab');
@@ -53,19 +53,19 @@ class InsurancePage {
             await expect(this.page.locator('#gendermale')).toBeVisible();
             await this.gender.first().check({ force: true });
             // to Enter the Street Address in Insurant Data
-            await this.streetAddress.fill('H.No:125/14/I/10, Stewart Street');
+            await this.streetAddress.fill(streetAddress);
             // Select the Country of the Insurant
             await this.country.selectOption('United States');
             // Enter the Zip Code of the Insurant
-            await this.ZipCode.fill('10004');
+            await this.ZipCode.fill(ZipCode);
             // Enter the City of the Insurant
-            await this.city.fill('new York');
+            await this.city.fill(city);
             // Enter the Occupation of the Insurant.
             await this.occupation.selectOption('Public Official');
             // Select the Hobby of the Insurance
             await this.hobbies.check({ force: true });
             // Enter the Website (if any ) of the Insurance
-            await this.website.fill('https://sampleapp.tricentis.com/101/app.php');
+            await this.website.fill(website);
             await this.page.keyboard.press('Tab');
             // To Upload the picture of the Insurance
             const filePath:any = path.resolve(__dirname, '../TestData/BMW Image.jpg');
