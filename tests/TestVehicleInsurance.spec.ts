@@ -173,7 +173,7 @@ test.describe('Testing Tricentis Vehicle Insurance Application', () => {
 
          // Enter Product Data;
         // To enter the Start date of the Product
-        await page.locator('#startdate').fill('05/15/2026');
+        await page.locator('#startdate').fill('10/15/2026');
         await page.keyboard.press('Tab');
         // To select the Insurance Sum amount in the product.
         await page.locator('#insurancesum').selectOption('7000000');
@@ -283,7 +283,7 @@ test.describe('Testing Tricentis Vehicle Insurance Application', () => {
 
         // Enter Product Data;
         // To enter the Start date of the Product
-        await page.locator('#startdate').fill('05/15/2026');
+        await page.locator('#startdate').fill('10/15/2026');
         await page.keyboard.press('Tab');
         // To select the Insurance Sum amount in the product.
         await page.locator('#insurancesum').selectOption('25000000');

@@ -1,5 +1,5 @@
 
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import { TricentisPageObject } from '../TricentisPages/TricentisPageObject';
 
 test.describe('Testing Tricentis Vehicle Insurance Application', () => {
