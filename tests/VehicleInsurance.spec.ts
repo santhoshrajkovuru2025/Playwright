@@ -22,7 +22,12 @@ test.describe('Testing Tricentis Vehicle Insurance Application', () => {
         await login.selectVehicle();
 
         // Enter Vehicle Data:
-        await vehicle.getVehicleDetails(vehicleDetails.engineperformance,vehicleDetails.listPrice,vehicleDetails.licenseNumber,vehicleDetails.annualMilleage);
+        await vehicle.getVehicleDetails({
+            engineperformance:vehicleDetails.engineperformance,
+            listPrice:vehicleDetails.listPrice,
+            licenseNumber:vehicleDetails.licenseNumber,
+            annualMilleage:vehicleDetails.annualMilleage
+        });
 
         // Enter Insurance Data:
         await Insurance.getInsurance(InsuranceDetails.firstName,InsuranceDetails.lastName,InsuranceDetails.streetAddress,InsuranceDetails.ZipCode,InsuranceDetails.city,InsuranceDetails.website);
